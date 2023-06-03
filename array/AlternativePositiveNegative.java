@@ -10,15 +10,33 @@ output: arr[] = {-5, 5, -2, 2, -8, 4, 7, 1, 8, 0}
 
 Solution Algo : 
 The idea is to process array from left to right. While processing, find the first out of place element in the remaining
- unprocessed array. An element is out of place if it is negative and at odd index, or it is positive and at even index.
+ unprocessed array. An eleleetcodement is out of place if it is negative and at odd index, or it is positive and at even index.
  Once we find an out of place element,  we find the first element after it with opposite sign. 
  We right rotate the subarray between these two elements (including these two).
  */
 
 
 public class AlternativePositiveNegative {
-	
-	
+
+	static int[] reArrangeArray(int nums[])
+	{
+		int a = 0;
+		int b = 1;
+		int arr[] = new int[nums.length];
+		for(int i=0;i<nums.length;i++){
+			if(nums[i]>0){
+				arr[a] = nums[i];
+				a = a+2;
+			}
+			else{
+				arr[b] = nums[i];
+				b = b+2;
+			}
+		}
+		return arr;
+	}
+
+
 	static void reArrange(int a[]) {
 		int outOfPlace = -1;
 		

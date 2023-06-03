@@ -1,20 +1,21 @@
 import java.util.Scanner;
 
-class Node
-{
-	int data;
-	Node left,right;
-	
-	Node(int d)
-	{
-		data = d;
-		left = right = null;		
-	}
-}
+
 
 
 public class BST
 {
+    class Node
+    {
+        int data;
+        Node left,right;
+
+        Node(int d)
+        {
+            data = d;
+            left = right = null;
+        }
+    }
     Node rootNode;
     int minValue(Node node)
     {

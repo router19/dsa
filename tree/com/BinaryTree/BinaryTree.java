@@ -4,18 +4,19 @@ import java.util.Queue;
 import java.util.Stack;
 
 
-
 class Node
- {
+{
 	int data;
 	Node leftChild;
 	Node rightChild;
-	
+
 	Node(int data){
 		this.data = data;
 	}
- }
+}
+
 public class BinaryTree {
+
 	Node rootNode;
 		 
 	//BFS of a tree, aka level order traversal

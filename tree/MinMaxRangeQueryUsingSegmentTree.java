@@ -84,7 +84,7 @@ Time complexity to query is O(Logn). To query a range minimum, we process at mos
  *
  */
 public class MinMaxRangeQueryUsingSegmentTree {
-	  class MinMax
+	  public class MinMax
 	{
 		int min;
 		int max;

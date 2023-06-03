@@ -12,17 +12,18 @@ class Node {
 	int data;
 	Node left;
 	Node right;
-	
+
 	int hd;
-	
+
 	public Node(int data)
 	{
 		this.data = data;
 		hd = Integer.MAX_VALUE;
-		left = right = null;		
+		left = right = null;
 	}
 }
 public class BinaryTree {
+
 	Node root;
 	
 	public BinaryTree(Node node)

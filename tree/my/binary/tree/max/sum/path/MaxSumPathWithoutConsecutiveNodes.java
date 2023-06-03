@@ -5,7 +5,16 @@ package my.binary.tree.max.sum.path;
  * is maximum under a constraint that no two chosen nodes in the subset should be directly connected that is, 
  * if we have taken a node in our sum then we can’t take any of its children in consideration and vice versa
  */
+class Node {
+	int data;
 
+	Node left,right;
+
+	public Node(int key)
+	{
+		data = key;
+	}
+}
 
 public class MaxSumPathWithoutConsecutiveNodes {
 

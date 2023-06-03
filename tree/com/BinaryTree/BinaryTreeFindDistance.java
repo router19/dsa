@@ -1,7 +1,11 @@
 package com.BinaryTree;
 
-public class BinaryTreeFindDistance extends BinaryTree{
-	
+
+
+public class BinaryTreeFindDistance extends BinaryTree {
+
+
+
 	static boolean isNodePresent(Node root, Node x)
 	{
 		if(root == null)

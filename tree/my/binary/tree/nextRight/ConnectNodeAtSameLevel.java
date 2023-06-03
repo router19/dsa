@@ -28,7 +28,7 @@ class Node {
 	int data;
 	Node right,left;
 	Node nextRight;
-	
+
 	Node(int key)
 	{
 		data = key;

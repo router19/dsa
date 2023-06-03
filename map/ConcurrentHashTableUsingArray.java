@@ -107,16 +107,16 @@ System.out.println("get(): Linear probling key found at location = " + i + " for
 		}
 	}
 	
-	public static void main(String[] args) {
-		HashTableUsingArray map = new HashTableUsingArray();
-		
-		map.set(5, 5);
-		System.out.println("map.get(5) = " + map.get(5));
-		
-		map.set(128, 128);
-		System.out.println("map.get(128) = " + map.get(128));
-		map.set(0, 0);
-		System.out.println("map.get(0) = " + map.get(0));
+	public static <HashTableUsingArray> void main(String[] args) {
+//		HashTableUsingArray map = new HashTableUsingArray();
+//
+//		map.set(5, 5);
+//		System.out.println("map.get(5) = " + map.get(5));
+//
+//		map.set(128, 128);
+//		System.out.println("map.get(128) = " + map.get(128));
+//		map.set(0, 0);
+//		System.out.println("map.get(0) = " + map.get(0));
 		
 	}
 	
