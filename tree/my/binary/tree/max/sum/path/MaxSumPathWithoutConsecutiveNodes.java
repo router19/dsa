@@ -3,18 +3,18 @@ package my.binary.tree.max.sum.path;
 /*
  * Given a binary tree with a value associated with each node, we need to choose a subset of these nodes such that the sum of chosen nodes 
  * is maximum under a constraint that no two chosen nodes in the subset should be directly connected that is, 
- * if we have taken a node in our sum then we can’t take any of its children in consideration and vice versa
+ * if we have taken a node in our sum then we canï¿½t take any of its children in consideration and vice versa
  */
-class Node {
-	int data;
-
-	Node left,right;
-
-	public Node(int key)
-	{
-		data = key;
-	}
-}
+//class Node {
+//	int data;
+//
+//	Node left,right;
+//
+//	public Node(int key)
+//	{
+//		data = key;
+//	}
+//}
 
 public class MaxSumPathWithoutConsecutiveNodes {
 

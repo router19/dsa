@@ -1,7 +1,25 @@
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
+/*
+Advantages of using an Adjacency list:
+----------------------------
+An adjacency list is simple and easy to understand.
+Adding or removing edges from a graph is quick and easy.
+
+Disadvantages of using an Adjacency list:
+----------------------------------
+In adjacency lists accessing the edges can take longer than the adjacency matrix.
+It requires more memory than the adjacency matrix for dense graphs.
+
+
+Applications of the Adjacency List:
+Graph algorithms: Many graph algorithms like Dijkstra’s algorithm, Breadth First Search, and Depth First Search use adjacency lists to represent graphs.
+Image Processing: Adjacency lists can be used to represent the adjacency relationships between pixels in an image.
+Game Development: These lists can be used to store information about the connections between different areas or levels the game developers use graphs to represent game maps or levels.
+ */
 public class GraphUsingAdjacencyList {
 	
 	//no of vertices
@@ -14,11 +32,11 @@ public class GraphUsingAdjacencyList {
 		
 		for(int i=0;i < V;i++)
 		{
-			adListArray[i] = new LinkedList<Integer>();
+			adListArray[i] = new LinkedList<>();
 		}
 	}
 	//Below is addEdge for undirected graph
-	void addUndirectedEdge(GraphUsingAdjacencyList graph,int src,int dest)
+	public void addUndirectedEdge(GraphUsingAdjacencyList graph,int src,int dest)
 	{
 		//Add an edge from src to dest
 		graph.adListArray[src].add(dest);
@@ -62,20 +80,46 @@ public class GraphUsingAdjacencyList {
 			// Get all adjacent vertices of the dequeued vertex s 
             // If a adjacent has not been visited, then mark it 
             // visited and enqueue it 
-			Iterator<Integer> i = adListArray[src].listIterator();
-			while(i.hasNext())
+
+			for(int n : adListArray[src])
 			{
-				int n = i.next();
 				if(!visited[n])
 				{
 					visited[n] = true;
 					queue.add(n);
 				}
 			}
-			
-			
 		}
 		
+	}
+
+
+	//
+	// bfs for disconnected graph
+	//
+	void bfs(int src, boolean visited[]){
+		Queue<Integer> queue = new LinkedList<>();
+
+		queue.add(src);
+		visited[src] = true;
+
+		while(!queue.isEmpty()){
+			int vertex = queue.poll();
+			System.out.print(vertex + " ");
+			for(int v : adListArray[vertex]){
+				if(!visited[v]){
+					visited[v] = true;
+					queue.add(v);
+				}
+			}
+		}
+	}
+	void bfsHelper(){
+		boolean visited[] = new boolean[V];
+		for(int i =V-1;i>= 0; i--){
+			if(!visited[i])
+			bfs(i,visited);
+		}
 	}
 	
 	/*
@@ -99,7 +143,9 @@ public class GraphUsingAdjacencyList {
 	void DFS(int src)
 	{
 		boolean visited[] = new boolean[V];
-		
+		//Use below to cover disconnected graph
+		//for(int i =0; i< V; i++)
+		//if(!visited[i])
 		DFSRec(src,visited);
 	}
 	
@@ -111,8 +157,8 @@ public class GraphUsingAdjacencyList {
     
 	// This function is a variation of DFSUtil() in
     // https://www.geeksforgeeks.org/archives/18212
-    private boolean isCyclicUtil(int i, boolean[] visited,
-                                      boolean[] recStack)
+    private boolean isCyclicUtilDirectedGraph(int i, boolean[] visited,
+												boolean[] recStack)
     {
         if (recStack[i])
             return true;
@@ -128,7 +174,7 @@ public class GraphUsingAdjacencyList {
         List<Integer> children = adListArray[i];
          
         for (Integer c: children)
-            if (isCyclicUtil(c, visited, recStack))
+            if (isCyclicUtilDirectedGraph(c, visited, recStack))
                 return true;
                  
         recStack[i] = false;
@@ -158,7 +204,7 @@ public class GraphUsingAdjacencyList {
         // Call the recursive helper function to
         // detect cycle in different DFS trees
         for (int i = 0; i < V; i++)
-            if (isCyclicUtil(i, visited, recStack))
+            if (isCyclicUtilDirectedGraph(i, visited, recStack))
                 return true;
  
         return false;
@@ -175,8 +221,8 @@ public class GraphUsingAdjacencyList {
     // uses visited[] and parent to detect
     // cycle in subgraph reachable
     // from vertex v.
-    Boolean isCyclicUtil(int v,
-                 Boolean visited[], int parent)
+    Boolean isCyclicUtilUnDirectedGraph(int v,
+										Boolean visited[], int parent)
     {
         // Mark the current node as visited
         visited[v] = true;
@@ -195,7 +241,7 @@ public class GraphUsingAdjacencyList {
             // adjacent
             if (!visited[i])
             {
-                if (isCyclicUtil(i, visited, v))
+                if (isCyclicUtilUnDirectedGraph(i, visited, v))
                     return true;
             }
  
@@ -228,7 +274,7 @@ public class GraphUsingAdjacencyList {
          
             // Don't recur for u if already visited
             if (!visited[u])
-                if (isCyclicUtil(u, visited, -1))
+                if (isCyclicUtilUnDirectedGraph(u, visited, -1))
                     return true;
         }
  
@@ -278,6 +324,31 @@ public class GraphUsingAdjacencyList {
                 "(starting from vertex 2)"); 
 
         g.DFS(2);
+
+
+
+
+		GraphUsingAdjacencyList g1 = new GraphUsingAdjacencyList(6);
+
+		g.addDirectedEdge(g1,5, 2);
+		g.addDirectedEdge(g1,5, 0);
+		g.addDirectedEdge(g1,4, 0);
+		g.addDirectedEdge(g1,4, 1);
+		g.addDirectedEdge(g1,2, 3);
+		g.addDirectedEdge(g1,3, 1);
+		System.out.println("Graph is ");
+		g.printGraph(g1);
+		System.out.println("Following is Breadth First Traversal "+
+				"(starting from vertex 5)");
+
+		g1.bfsHelper();
+		System.out.println();
+		//
+		//DFS
+		System.out.println("Following is Depth First Traversal "+
+				"(starting from vertex 5)");
+
+		g1.DFS(5);
 	}
 
 }

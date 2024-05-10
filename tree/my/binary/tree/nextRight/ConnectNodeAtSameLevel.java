@@ -21,7 +21,10 @@ Output Tree
    D-->E-->F-->NULL
 
  */
+import javax.swing.tree.TreeNode;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 class Node {
@@ -87,6 +90,40 @@ public class ConnectNodeAtSameLevel {
 		}
 		
 	}
+
+	public static List<List<Integer>> levelOrder(Node root) {
+		List<List<Integer>> result = new ArrayList<>();
+		if(root == null)
+			return result;
+		List<Integer> nodes = new ArrayList<>();
+		Queue<Node> q = new LinkedList<>();
+		q.add(root);
+		q.add(null);
+		Node node = null;
+		while(!q.isEmpty())
+		{
+			node = q.poll();
+			System.out.println(node);
+			if(node != null)
+			{
+				nodes.add(node.data);
+				if(node.left != null)
+					q.add(node.left);
+				if(node.right != null)
+					q.add(node.right);
+
+			}else if(!q.isEmpty())
+			{
+				result.add(nodes);
+				nodes = new ArrayList<>();
+				System.out.println("Adding null");
+				q.add(null);
+			}
+
+		}
+		result.add(nodes);
+		return result;
+	}
 	public static void main(String[] args) {
 		
 
@@ -103,9 +140,17 @@ public class ConnectNodeAtSameLevel {
 		root.left.left = new Node(3); 
 		root.right.right = new Node(90); 
 
-		// Populates nextRight pointer in all nodes 
-		connect(root); 
 
+		// Populates nextRight pointer in all nodes 
+		connect(root);
+
+		Node root1 = new Node(3);
+		root1.left = new Node(9);
+		root1.right = new Node(20);
+		root1.right.left = new Node(15);
+		root1.right.right = new Node(7);
+
+		System.out.println(levelOrder(null));
 		// Let us check the values of nextRight pointers 
 		System.out.println("Following are populated nextRight pointers in \n" + 
 				"the tree (-1 is printed if there is no nextRight)"); 
